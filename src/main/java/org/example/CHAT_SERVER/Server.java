@@ -12,21 +12,26 @@ public class Server {
             while (true){
                 Socket s = socket.accept();
                 BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-                PrintWriter out = new PrintWriter(s.getOutputStream());
+                PrintWriter out = new PrintWriter(s.getOutputStream(),true);
                 System.out.println("Client connected at : " + s.getPort());
 
                 new Thread(()->{
                     try{
                         String str;
                         while((str = in.readLine()) != null){
-                            System.out.println("Client Message : "+ str);
+                            System.err.println("Client Message : "+ str);
                         }
                     } catch (IOException ignored) {}
                 }).start();
 
                 new Thread(() -> {
-                    while(true)
+                    try{
+                        Thread.sleep(5000);
+                        System.out.println("Sending to Client");
                         out.println("Hello");
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 }).start();
             }
 
