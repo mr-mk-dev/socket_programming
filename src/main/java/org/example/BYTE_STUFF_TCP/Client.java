@@ -11,7 +11,7 @@ public class Client {
             Socket socket = new Socket("localhost",5000);
             System.out.println("Client Started...");
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream());
+            PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
             BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
 
             System.out.print("Enter data here : ");
