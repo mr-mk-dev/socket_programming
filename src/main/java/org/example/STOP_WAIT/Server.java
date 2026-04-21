@@ -15,9 +15,12 @@ public class Server {
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             PrintWriter out = new PrintWriter(s.getOutputStream(),true);
 
-            String clientData = in.readLine();
-            System.out.println("Received Data from client : " + clientData);
-            out.println("ACK");
+            while(true){
+                String clientData = in.readLine();
+                System.out.println("Received Data from client : " + clientData);
+                out.println("ACK");
+            }
+
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
